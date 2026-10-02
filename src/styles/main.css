@@ -236,7 +236,7 @@ em { font-style: italic; }
 .mobile-menu a {
   display: flex; align-items: baseline; gap: 14px; padding-block: 6px;
   font-family: var(--f-display); font-weight: 800; text-transform: uppercase;
-  font-size: clamp(2.5rem, 12vw, 4.5rem); line-height: 1; letter-spacing: -0.04em; text-decoration: none;
+  font-size: min(9vw, 4.5rem); line-height: 1.05; letter-spacing: -0.04em; text-decoration: none;
 }
 .mobile-menu__foot { font-size: var(--fs-sm); opacity: 0.8; }
 
@@ -647,6 +647,7 @@ html:not(.has-cursor) .cursor { display: none; }
   .menu-toggle { display: inline-flex; align-items: center; }
   .site-header__cta { margin-left: auto; }
   .menu-toggle { margin-left: 4px; }
+  .site-header { gap: 12px; }
 
   .manifesto__cols > *,
   .omakase__intro > *, .sake__intro > *,
@@ -670,17 +671,17 @@ html:not(.has-cursor) .cursor { display: none; }
   .footer__bottom { grid-template-columns: 1fr; }
 }
 
-/* Móvil vertical: el hero se reacomoda — NI / SHI / KI apilado, koi centrados y más chicos */
+/* Móvil vertical: NI / SHI / KI apilado y centrado en la pantalla, koi grandes encima */
 @media (max-width: 700px) and (orientation: portrait) {
-  .hero { grid-template-rows: 1fr auto auto; padding-bottom: 24px; }
-  .hero__title { line-height: 0.82; margin-bottom: 28px; }
+  .hero { grid-template-rows: 1fr auto 1fr; padding-bottom: 24px; }
+  .hero__title { line-height: 0.82; }
   .hero__line--1 { display: contents; }
   .hero__chunk { display: block; width: fit-content; padding-right: 0.045em; }
-  .hero__chunk:nth-child(2) { margin-left: auto; }        /* SHI a la derecha */
-  .hero__line--2 { margin-left: 0; }                      /* KI a la izquierda */
-  .koi-wrap { --koi-w: 132vw; inset: 26% 0 6% 0; }
+  .hero__line--2 { margin-left: auto; }                   /* KI a la derecha: zigzag NI ← SHI → KI */
+  /* centrados sobre el título (el +header compensa el padding superior del hero) */
+  .koi-wrap { --koi-w: 118vw; inset: calc(var(--header-h) - 4px) 0 0 0; }
   .hero__kanji { top: calc(var(--header-h) + 16px); font-size: 1.25rem; }
-  .hero__foot { position: static; grid-row: 3; width: auto; padding: 0; grid-template-columns: 1fr auto; align-items: end; gap: 20px; }
+  .hero__foot { position: static; grid-row: 3; align-self: end; width: auto; padding: 0; }
 }
 
 @media (max-width: 700px) {
@@ -718,4 +719,10 @@ html:not(.has-cursor) .cursor { display: none; }
   /* "none" y no duraciones mínimas: con transition-property:all por defecto,
      una duración de 0.01ms haría transicionar también font-size (rompe fit.js) */
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Celulares muy angostos: el botón Reservar ya está dentro del menú */
+@media (max-width: 360px) {
+  .site-header__cta { display: none; }
+  .menu-toggle { margin-left: auto; }
 }
