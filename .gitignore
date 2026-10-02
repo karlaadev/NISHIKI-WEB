@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+
+# Videos de pruebas anteriores que ya no se usan (la fuente actual es assets/koi-fondo-rosa.mp4)
+assets/koi-sin-fondo.mp4
+assets/koi-con-fondo.mp4
+assets/koi-uno.mp4

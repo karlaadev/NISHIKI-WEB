@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NISHIKI — Omakase &amp; Sake Bar · Roma Norte, CDMX</title>
+  <meta name="description" content="Omakase de 9, 13 y 17 tiempos y una carta curada de sake en una barra de doce asientos en Roma Norte, Ciudad de México. Pescado de Ensenada, dos turnos por noche." />
+  <meta name="theme-color" content="#8E0B0B" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / redes -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:title" content="NISHIKI — Omakase & Sake Bar" />
+  <meta property="og:description" content="Doce asientos. Dos turnos. Confía en el chef. Roma Norte, CDMX." />
+  <meta property="og:image" content="/media/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Dos peces koi pintados nadando sobre un fondo rojo" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Kanji: solo descargamos los glifos que usa el sitio (subset vía ?text=) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600&amp;text=%E9%8C%A6%E9%AF%89%E3%81%8A%E3%81%BE%E3%81%8B%E3%81%9B%E9%85%92%E5%B7%9D%E6%BB%9D%E9%BE%8D%E6%9D%BF%E5%89%8D%E4%BD%93%E9%A8%93%E4%BA%88%E7%B4%84%E5%A0%B4%E6%89%80%E4%B8%80%E6%9C%9F%E4%BC%9A%E5%BF%83&amp;display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600&amp;text=%E9%8C%A6%E9%AF%89%E3%81%8A%E3%81%BE%E3%81%8B%E3%81%9B%E9%85%92%E5%B7%9D%E6%BB%9D%E9%BE%8D%E6%9D%BF%E5%89%8D%E4%BD%93%E9%A8%93%E4%BA%88%E7%B4%84%E5%A0%B4%E6%89%80%E4%B8%80%E6%9C%9F%E4%BC%9A%E5%BF%83&amp;display=swap" /></noscript>
+
+  <!-- El poster es el candidato a LCP: lo pedimos temprano -->
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+        imagesrcset="/media/koi-poster-800.webp 800w, /media/koi-poster.webp 1280w"
+        imagesizes="(max-width: 700px) 132vw, min(90vw, 1500px)" />
+
+  <script>
+    // Antes del primer pintado: si habrá animaciones, ocultamos lo que entra animado
+    // (evita el parpadeo). Failsafe: si el JS no carga en 4 s, se muestra todo.
+    (function (d) {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      d.classList.add('motion');
+      setTimeout(function () { d.classList.remove('motion'); }, 4000);
+    })(document.documentElement);
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- Filtro SVG para el video con alpha: manda a 0 el alpha residual del VP9 (ver src/koi/config.js → CLEAN_EDGES) -->
+  <svg class="sr-only" aria-hidden="true" focusable="false">
+    <filter id="koi-clean" color-interpolation-filters="sRGB">
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="1.04" intercept="-0.04" />
+      </feComponentTransfer>
+    </filter>
+  </svg>
+
+  <!-- ─────────────────────────── HEADER ─────────────────────────── -->
+  <header class="site-header" data-header>
+    <a class="brand" href="#top">
+      <span class="brand__word">Nishiki</span><span class="brand__jp" lang="ja" aria-hidden="true">錦</span>
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="#omakase">Omakase</a></li>
+        <li><a href="#sake">Sake</a></li>
+        <li><a href="#chef">El chef</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--pill site-header__cta" href="#reservar"><span>Reservar</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="menu-toggle__label">Menú</span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Móvil">
+      <ul>
+        <li><a href="#omakase">Omakase</a></li>
+        <li><a href="#sake">Sake</a></li>
+        <li><a href="#chef">El chef</a></li>
+        <li><a href="#reservar">Reservar</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+      </ul>
+    </nav>
+    <p class="mobile-menu__foot">Colima 147, Roma Norte · Mar—Dom</p>
+  </div>
+
+  <main id="main">
+    <!-- ─────────────────────────── 01 · HERO ─────────────────────────── -->
+    <section class="hero" id="top" data-theme="red" aria-labelledby="hero-title">
+      <!-- Capa 2: tipografía gigante (queda DEBAJO de los koi) -->
+      <h1 class="hero__title" id="hero-title" data-hero-title>
+        <span class="sr-only">Nishiki — Omakase y Sake Bar</span>
+        <span class="hero__line hero__line--1" aria-hidden="true"><span class="hero__chunk">NI</span><span class="hero__chunk">SHI</span></span>
+        <span class="hero__line hero__line--2" aria-hidden="true"><span class="hero__chunk">KI</span></span>
+      </h1>
+
+      <p class="hero__kanji" lang="ja" aria-hidden="true" data-hero-meta>錦鯉</p>
+
+      <!-- Capa 3: los koi. JS monta aquí <video> (Opción A) o <canvas> WebGL (Opción B).
+           El poster se queda como fallback (sin JS, reduced motion o si falla el video). -->
+      <div class="koi-wrap">
+        <div class="koi-stage" data-koi-stage>
+          <img class="koi-layer koi-poster" src="/media/koi-poster.webp" width="1280" height="720"
+               srcset="/media/koi-poster-800.webp 800w, /media/koi-poster.webp 1280w"
+               sizes="(max-width: 700px) 132vw, min(90vw, 1500px)"
+               alt="Dos peces koi, uno blanco con manchas rojas y otro dorado con escamas verde azulado, nadando en círculo."
+               fetchpriority="high" decoding="async" />
+        </div>
+      </div>
+
+      <div class="hero__foot" data-hero-meta>
+        <a class="scroll-cue" href="#manifiesto">Desliza
+          <svg class="scroll-cue__arrow" viewBox="0 0 12 16" aria-hidden="true" focusable="false"><path d="M6 1v13M1 9l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 02 · MANIFIESTO ─────────────────────────── -->
+    <section class="section manifesto" id="manifiesto" data-theme="cream" aria-labelledby="manifesto-title">
+      <div class="container">
+        <h2 class="sr-only" id="manifesto-title">Manifiesto</h2>
+
+        <p class="manifesto__quote" data-split>
+          Dicen que el koi nada contra la corriente hasta convertirse en dragón. Aquí cocinamos igual: con paciencia, a contracorriente y sin atajos.
+        </p>
+
+        <div class="manifesto__cols">
+          <p class="manifesto__term"><span lang="ja">おまかせ</span> <em>o·ma·ka·se</em></p>
+          <p data-reveal>Del japonés <em>«lo dejo en tus manos»</em>. No hay carta ni decisiones que tomar: te sientas, confías y el chef cocina para ti, pieza por pieza, según lo que el mar trajo esa mañana.</p>
+          <p data-reveal>Nishiki es la palabra para el brocado de seda y el nombre de los koi más preciados. Es también nuestra promesa: un oficio tejido despacio, donde cada detalle se nota aunque nadie lo señale.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 03 · OMAKASE ─────────────────────────── -->
+    <section class="section omakase" id="omakase" data-theme="ink" aria-labelledby="omakase-title">
+      <div class="container">
+        <h2 class="sr-only" id="omakase-title">Omakase</h2>
+
+        <div class="omakase__intro">
+          <h3 class="display-m" data-split>Tres recorridos.<br />Un solo ritmo: el del chef.</h3>
+          <p data-reveal>Cada experiencia avanza de lo más ligero a lo más profundo: sashimi, nigiri, un plato caliente, un tazón de sopa y un postre que cambia cada semana. Los precios incluyen té y servicio de barra.</p>
+        </div>
+
+        <ol class="courses" role="list">
+          <li class="course" data-preview="0">
+            <span class="course__idx">I</span>
+            <h4 class="course__name">Kawa <span lang="ja">川</span></h4>
+            <p class="course__count">9 tiempos <span>· 75 min</span></p>
+            <p class="course__desc">El río: una introducción luminosa. Pesca blanca de Baja California, curados cortos y arroz con vinagre de arroz rojo.</p>
+            <p class="course__price"><span class="course__amount">$2,400</span> MXN</p>
+            <p class="course__pair">Maridaje de sake (3 copas) +$950</p>
+          </li>
+          <li class="course" data-preview="1">
+            <span class="course__idx">II</span>
+            <h4 class="course__name">Taki <span lang="ja">滝</span></h4>
+            <p class="course__count">13 tiempos <span>· 100 min</span></p>
+            <p class="course__desc">La cascada: nuestro omakase clásico. Atún aleta azul en tres cortes, uni de Ensenada y un chawanmushi de temporada.</p>
+            <p class="course__price"><span class="course__amount">$3,600</span> MXN</p>
+            <p class="course__pair">Maridaje de sake (5 copas) +$1,400</p>
+          </li>
+          <li class="course" data-preview="2">
+            <span class="course__idx">III</span>
+            <h4 class="course__name">Ryū <span lang="ja">龍</span></h4>
+            <p class="course__count">17 tiempos <span>· 140 min</span></p>
+            <p class="course__desc">El dragón: la noche completa. Piezas añejadas en seco hasta 14 días, kinmedai aburi y wagyu A5 sobre carbón binchotan.</p>
+            <p class="course__price"><span class="course__amount">$4,900</span> MXN</p>
+            <p class="course__pair">Maridaje de sake (7 copas) +$2,100</p>
+          </li>
+        </ol>
+
+        <!-- Fotos: originales en /assets, optimizadas con npm run photos → /media/photos -->
+        <div class="dishes">
+          <figure class="dish" data-parallax="-8">
+            <img class="photo" src="/media/photos/otoro-572.webp" srcset="/media/photos/otoro-480.webp 480w, /media/photos/otoro-572.webp 572w" sizes="(max-width: 900px) 50vw, 30vw" width="572" height="1024" alt="Dos nigiri de otoro sobre un plato de cerámica oscura, con wasabi y jengibre" loading="lazy" decoding="async" />
+            <figcaption><span>01</span> Otoro, soya añejada</figcaption>
+          </figure>
+          <figure class="dish dish--tall" data-parallax="6">
+            <img class="photo" src="/media/photos/uni-768.webp" srcset="/media/photos/uni-480.webp 480w, /media/photos/uni-768.webp 768w" sizes="(max-width: 900px) 50vw, 30vw" width="768" height="1376" alt="El chef sostiene con palillos un bocado de uni sobre una hoja de nori tostado" loading="lazy" decoding="async" />
+            <figcaption><span>02</span> Uni de Ensenada, nori tostado</figcaption>
+          </figure>
+          <figure class="dish" data-parallax="-4">
+            <img class="photo" src="/media/photos/kinmedai-768.webp" srcset="/media/photos/kinmedai-480.webp 480w, /media/photos/kinmedai-768.webp 768w" sizes="(max-width: 900px) 50vw, 30vw" width="768" height="1376" alt="Nigiri de kinmedai flameado con ralladura de yuzu sobre un plato oscuro" loading="lazy" decoding="async" />
+            <figcaption><span>03</span> Kinmedai aburi, yuzu</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Vista previa que sigue al cursor al pasar sobre cada experiencia (solo escritorio) -->
+      <div class="course-preview" aria-hidden="true">
+        <img src="/media/photos/otoro-572.webp" alt="" loading="lazy" decoding="async" />
+        <img src="/media/photos/uni-768.webp" alt="" loading="lazy" decoding="async" />
+        <img src="/media/photos/kinmedai-768.webp" alt="" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 04 · SAKE ─────────────────────────── -->
+    <section class="section sake" id="sake" data-theme="cream" aria-labelledby="sake-title">
+      <div class="container">
+        <h2 class="sr-only" id="sake-title">Sake</h2>
+
+        <div class="sake__intro">
+          <h3 class="display-m" data-split>Seis botellas,<br />seis regiones.</h3>
+          <p data-reveal>Una selección corta que rota con la temporada. Servimos en copa de 90&nbsp;ml, a la temperatura que pida cada sake: frío, a temperatura ambiente o tibio.</p>
+        </div>
+
+        <table class="sake-table">
+          <caption class="sr-only">Carta de sake: prefectura, estilo, notas de cata y precio por copa</caption>
+          <thead>
+            <tr>
+              <th scope="col">N.º</th>
+              <th scope="col">Sake</th>
+              <th scope="col">Prefectura</th>
+              <th scope="col">Estilo</th>
+              <th scope="col">Notas de cata</th>
+              <th scope="col" class="num">Copa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-reveal>
+              <td data-label="N.º">01</td>
+              <th scope="row" data-label="Sake">Dassai 45</th>
+              <td data-label="Prefectura">Yamaguchi</td>
+              <td data-label="Estilo">Junmai Daiginjo</td>
+              <td data-label="Notas">Pera, melón blanco, final limpio y floral.</td>
+              <td data-label="Copa" class="num">$290</td>
+            </tr>
+            <tr data-reveal>
+              <td data-label="N.º">02</td>
+              <th scope="row" data-label="Sake">Hakkaisan Tokubetsu</th>
+              <td data-label="Prefectura">Niigata</td>
+              <td data-label="Estilo">Honjozo</td>
+              <td data-label="Notas">Seco y nítido; arroz cocido, piedra mojada.</td>
+              <td data-label="Copa" class="num">$220</td>
+            </tr>
+            <tr data-reveal>
+              <td data-label="N.º">03</td>
+              <th scope="row" data-label="Sake">Kokuryu «Black Dragon»</th>
+              <td data-label="Prefectura">Fukui</td>
+              <td data-label="Estilo">Junmai Ginjo</td>
+              <td data-label="Notas">Almendra, manzana amarilla, textura sedosa.</td>
+              <td data-label="Copa" class="num">$310</td>
+            </tr>
+            <tr data-reveal>
+              <td data-label="N.º">04</td>
+              <th scope="row" data-label="Sake">Tedorigawa Yamahai</th>
+              <td data-label="Prefectura">Ishikawa</td>
+              <td data-label="Estilo">Yamahai Junmai</td>
+              <td data-label="Notas">Umami profundo, hongo shiitake, acidez láctica.</td>
+              <td data-label="Copa" class="num">$260</td>
+            </tr>
+            <tr data-reveal>
+              <td data-label="N.º">05</td>
+              <th scope="row" data-label="Sake">Kikusui Funaguchi</th>
+              <td data-label="Prefectura">Niigata</td>
+              <td data-label="Estilo">Nama Genshu</td>
+              <td data-label="Notas">Sin pasteurizar; durazno maduro, intenso y vivo.</td>
+              <td data-label="Copa" class="num">$240</td>
+            </tr>
+            <tr data-reveal>
+              <td data-label="N.º">06</td>
+              <th scope="row" data-label="Sake">Born «Gold» Muroka</th>
+              <td data-label="Prefectura">Fukui</td>
+              <td data-label="Estilo">Junmai Daiginjo · añejo</td>
+              <td data-label="Notas">Añejado bajo cero; miel, plátano, final larguísimo.</td>
+              <td data-label="Copa" class="num">$420</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 05 · CHEF ─────────────────────────── -->
+    <section class="section chef" id="chef" data-theme="red" aria-labelledby="chef-title">
+      <div class="container chef__grid">
+        <h2 class="sr-only" id="chef-title">El chef</h2>
+
+        <figure class="chef__portrait" data-parallax="-6">
+          <img class="photo" src="/media/photos/chef-768.webp" srcset="/media/photos/chef-480.webp 480w, /media/photos/chef-768.webp 768w" sizes="(max-width: 900px) 90vw, 40vw" width="768" height="1376" alt="Retrato del chef Kenji Arakawa con banda blanca en la frente y mandil azul, sosteniendo un cuchillo de cocina junto a su tabla" loading="lazy" decoding="async" />
+          <span class="chef__vertical" lang="ja" aria-hidden="true">板前</span>
+        </figure>
+
+        <div class="chef__body">
+          <p class="chef__name display-m" data-split>Kenji Arakawa</p>
+          <p class="chef__role">Itamae &amp; fundador</p>
+          <blockquote class="chef__quote" data-reveal>
+            <p>«El mejor pescado no se transforma. Se escucha.»</p>
+          </blockquote>
+          <p data-reveal>Nacido en Ensenada de padre japonés y madre bajacaliforniana, Kenji creció entre lonjas de pescado y la cocina de su abuela en Fukuoka. Pasó catorce años en Tokio, los últimos seis bajo la barra de un pequeño sushiya en Ginza.</p>
+          <p data-reveal>En 2026 volvió a México con una idea simple: tratar al producto del Pacífico mexicano con el mismo rigor que al de Toyosu. Nishiki es esa idea, servida doce veces por turno.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 06 · EXPERIENCIA ─────────────────────────── -->
+    <section class="section experience" id="experiencia" data-theme="ink" aria-labelledby="exp-title">
+      <div class="container">
+        <h2 class="sr-only" id="exp-title">La experiencia</h2>
+
+        <p class="experience__ichigo" data-split>
+          <span lang="ja">一期一会</span> — cada encuentro sucede una sola vez.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 07 · RESERVACIONES ─────────────────────────── -->
+    <section class="section reserve" id="reservar" data-theme="cream" aria-labelledby="reserve-title">
+      <div class="container reserve__grid">
+        <h2 class="sr-only" id="reserve-title">Reservaciones</h2>
+
+        <div class="reserve__aside">
+          <h3 class="display-m" data-split>Aparta tu lugar en la barra.</h3>
+          <p data-reveal>Abrimos reservaciones con treinta días de anticipación. Para grupos de más de seis personas o la barra completa, escríbenos a <a href="mailto:hola@nishiki.mx">hola@nishiki.mx</a>.</p>
+          <ul class="reserve__notes" role="list" data-reveal>
+            <li>Tolerancia de 10 minutos: el servicio empieza para todos a la vez.</li>
+            <li>Avísanos de alergias al reservar; adaptamos el menú con gusto.</li>
+            <li>Cancelación sin cargo hasta 48 h antes.</li>
+          </ul>
+        </div>
+
+        <div class="reserve__panel">
+          <form class="form" id="reserve-form" novalidate>
+            <div class="field">
+              <label for="f-name">Nombre completo</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required minlength="3" aria-describedby="f-name-err" />
+              <p class="field__err" id="f-name-err" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="f-email">Correo electrónico</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-err" />
+              <p class="field__err" id="f-email-err" aria-live="polite"></p>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-date">Fecha</label>
+                <input id="f-date" name="date" type="date" required aria-describedby="f-date-hint f-date-err" />
+                <p class="field__hint" id="f-date-hint">Martes a domingo. Lunes cerrado.</p>
+                <p class="field__err" id="f-date-err" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="f-guests">Personas</label>
+                <select id="f-guests" name="guests" required aria-describedby="f-guests-err">
+                  <option value="">Elige</option>
+                  <option>1</option><option selected>2</option><option>3</option>
+                  <option>4</option><option>5</option><option>6</option>
+                </select>
+                <p class="field__err" id="f-guests-err" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <fieldset class="field">
+              <legend>Turno</legend>
+              <div class="choices choices--2">
+                <label class="choice"><input type="radio" name="shift" value="18:30" required /><span>18:30 <small>Primer turno</small></span></label>
+                <label class="choice"><input type="radio" name="shift" value="21:15" /><span>21:15 <small>Segundo turno</small></span></label>
+              </div>
+              <p class="field__err" id="f-shift-err" aria-live="polite"></p>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend>Experiencia</legend>
+              <div class="choices choices--3">
+                <label class="choice"><input type="radio" name="experience" value="Kawa" required /><span>Kawa <small>9 tiempos · $2,400</small></span></label>
+                <label class="choice"><input type="radio" name="experience" value="Taki" /><span>Taki <small>13 tiempos · $3,600</small></span></label>
+                <label class="choice"><input type="radio" name="experience" value="Ryū" /><span>Ryū <small>17 tiempos · $4,900</small></span></label>
+              </div>
+              <p class="field__err" id="f-exp-err" aria-live="polite"></p>
+            </fieldset>
+
+            <label class="check">
+              <input type="checkbox" name="pairing" />
+              <span>Agregar maridaje de sake</span>
+            </label>
+
+            <button class="btn btn--solid btn--block" type="submit">
+              <span>Solicitar reservación</span>
+            </button>
+            <p class="form__legal">Demo: este formulario no envía datos a ningún servidor.</p>
+          </form>
+
+          <div class="form-success" id="reserve-success" hidden tabindex="-1">
+            <p class="form-success__kanji" lang="ja" aria-hidden="true">錦</p>
+            <h3 class="display-m">Te esperamos en la barra.</h3>
+            <p class="form-success__summary" data-summary></p>
+            <p class="form-success__code">Folio <strong data-code></strong></p>
+            <button class="btn btn--line" type="button" data-reset><span>Hacer otra reservación</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── 08 · UBICACIÓN ─────────────────────────── -->
+    <section class="section location" id="ubicacion" data-theme="ink" aria-labelledby="loc-title">
+      <div class="container location__grid">
+        <h2 class="sr-only" id="loc-title">Ubicación &amp; horarios</h2>
+
+        <div class="location__info">
+          <address data-reveal>
+            <p class="display-m">Colima 147,<br />Roma Norte</p>
+            <p>06700, Cuauhtémoc, Ciudad de México</p>
+            <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Colima+147+Roma+Norte+CDMX" target="_blank" rel="noopener">Abrir en mapas <span aria-hidden="true">↗</span></a>
+          </address>
+
+          <dl class="hours" data-reveal>
+            <div><dt>Martes — sábado</dt><dd>18:30 · 21:15</dd></div>
+            <div><dt>Domingo</dt><dd>14:00 · 17:30</dd></div>
+            <div><dt>Lunes</dt><dd>Cerrado</dd></div>
+            <div><dt>Barra de sake</dt><dd>Mar—Sáb hasta 01:00</dd></div>
+          </dl>
+        </div>
+
+        <!-- Mapa ilustrado (decorativo). Puedes reemplazarlo por un mapa estático. -->
+        <figure class="map" aria-hidden="true">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid slice">
+            <g class="map__streets">
+              <path d="M-20 90 L620 40" /><path d="M-20 200 L620 160" /><path d="M-20 320 L620 290" /><path d="M-20 420 L620 400" />
+              <path d="M80 -20 L130 460" /><path d="M230 -20 L270 460" /><path d="M390 -20 L410 460" /><path d="M520 -20 L540 460" />
+              <path class="map__avenue" d="M-20 470 C 160 330, 360 250, 620 110" />
+            </g>
+            <text x="150" y="182" class="map__label">Colima</text>
+            <text x="300" y="282" class="map__label">Álvaro Obregón</text>
+            <text x="404" y="78" class="map__label" transform="rotate(84 404 78)">Orizaba</text>
+            <g class="map__pin" transform="translate(330 176)">
+              <circle r="34" class="map__pulse" /><circle r="9" />
+            </g>
+          </svg>
+          <figcaption>Nishiki · Colima 147</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────── FOOTER ─────────────────────────── -->
+  <footer class="site-footer" data-theme="red">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__cta display-m">Confía en el chef.</p>
+        <a class="btn btn--light" href="#reservar"><span>Reservar ahora</span></a>
+      </div>
+
+      <p class="footer__word" aria-hidden="true" data-fit-footer><span>NISHIKI</span></p>
+
+      <div class="footer__bottom">
+        <ul class="footer__social" role="list">
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://open.spotify.com/" target="_blank" rel="noopener">Playlist de la barra</a></li>
+          <li><a href="mailto:hola@nishiki.mx">hola@nishiki.mx</a></li>
+        </ul>
+        <p class="footer__note">Proyecto conceptual — diseño y desarrollo por <a class="footer__sign" href="https://karla-portafolioo.netlify.app/" target="_blank" rel="noopener">CODEXKARLA</a>. Nishiki no es un restaurante real.</p>
+        <a class="footer__top-link" href="#top">Volver arriba <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cursor personalizado (solo puntero fino) -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__ring"></span><span class="cursor__label">Ver</span></div>
+</body>
+</html>
